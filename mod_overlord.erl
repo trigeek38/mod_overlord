@@ -84,6 +84,7 @@ event({submit, {subscriber_message, Args}, _TriggerId, _TargetId}, Context) ->
 
 event({postback, {update_slide, Args}, _TriggerId, _Target_id}, Context) ->
     SlideDiv = proplists:get_value(target, Args, "slide_content"),
+    SlideTemplate = proplists:get_value(template, Args, "_slide_content.tpl"),
     Id = proplists:get_value(id, Args),
     Script = z_script:get_script(z_render:wire([ {update,[{target, SlideDiv},{template,"_slide_content.tpl"}, {id, Id}]},
                                                  {script,[{script, "window.scrollTo(0,0)"}]}
